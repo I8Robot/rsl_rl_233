@@ -16,13 +16,13 @@ This code is an evolution of `rl-pytorch` provided with NVIDIA's Isaac Gym.
 > ⚠️ **重要**：如果环境中已安装 IsaacLab，请务必使用 `--no-deps` 参数，避免依赖冲突。
 
 ```bash
-pip install --no-deps git+https://github.com/I8Robot/rsl_rl_233.git
+pip install --no-deps git+https://github.com/I8Robot/rsl_rl_233.git@custom-v2.3.3
 ```
 
 ### 方式二：克隆仓库 + 开发模式安装（推荐，方便继续修改代码）
 
 ```bash
-git clone https://github.com/I8Robot/rsl_rl_233.git
+git clone -b custom-v2.3.3 https://github.com/I8Robot/rsl_rl_233.git
 cd rsl_rl_233
 pip install --no-deps -e .
 ```
@@ -31,7 +31,7 @@ pip install --no-deps -e .
 
 - 本包基于 `rsl-rl-lib==2.3.3`，安装后会替换环境中已有的 `rsl-rl-lib`
 - 使用 `--no-deps` 可防止 pip 升级 `torch`、`onnx`、`protobuf` 等依赖导致与 IsaacLab 冲突
-- 如果是全新环境（无 IsaacLab），可以不加 `--no-deps`：`pip install git+https://github.com/I8Robot/rsl_rl_233.git`
+- 如果是全新环境（无 IsaacLab），可以不加 `--no-deps`：`pip install git+https://github.com/I8Robot/rsl_rl_233.git@custom-v2.3.3`
 
 ### 支持的日志框架
 
