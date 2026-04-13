@@ -153,13 +153,18 @@ class OnPolicyRunner:
 
                 self.writer = ClearMLSummaryWriter(log_dir=self.log_dir, flush_secs=10, cfg=self.cfg)
                 self.writer.log_config(self.env.cfg, self.cfg, self.alg_cfg, self.policy_cfg)
+            elif self.logger_type == "sqlite":
+                from rsl_rl.utils.sqlite_summary_writer import SQLiteSummaryWriter
+
+                self.writer = SQLiteSummaryWriter(log_dir=self.log_dir, flush_secs=10, cfg=self.cfg)
+                self.writer.log_config(self.env.cfg, self.cfg, self.alg_cfg, self.policy_cfg)
 
             elif self.logger_type == "tensorboard":
                 from torch.utils.tensorboard import SummaryWriter
 
                 self.writer = SummaryWriter(log_dir=self.log_dir, flush_secs=10)
             else:
-                raise ValueError("Logger type not found. Please choose 'neptune', 'wandb', 'clearml' or 'tensorboard'.")
+                raise ValueError("Logger type not found. Please choose 'neptune', 'wandb', 'clearml', 'sqlite' or 'tensorboard'.")
 
         # check if teacher is loaded
         if self.training_type == "distillation" and not self.alg.policy.loaded_teacher:
