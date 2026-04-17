@@ -297,6 +297,9 @@ class OnPolicyRunner:
         # Save the final model after training
         if self.log_dir is not None and not self.disable_logs:
             self.save(os.path.join(self.log_dir, f"model_{self.current_learning_iteration}.pt"))
+            # 关闭 writer，确保 SQLite WAL checkpoint（将 .db-wal 数据合并回 .db）
+            if hasattr(self.writer, 'close'):
+                self.writer.close()
 
     def log(self, locs: dict, width: int = 80, pad: int = 35):
         # Compute the collection size

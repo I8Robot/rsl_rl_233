@@ -400,6 +400,10 @@ class SQLiteSummaryWriter(SummaryWriter):
                     self.conn.execute("VACUUM")
 
                     print("[INFO] Database cleanup completed on exit")
+
+                # 关闭连接，触发 WAL checkpoint（将 .db-wal 合并到 .db）
+                self.conn.close()
+                self.conn = None
         except Exception as e:
             # Ignore errors during cleanup (process is exiting anyway)
             pass
